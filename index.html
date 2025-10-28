@@ -1,0 +1,1476 @@
+    <script>
+        function handleSubmit(e) {
+            e.preventDefault();
+            alert('Thank you for your interest! This is a demo form. In a live site, your message would be sent to the voiceover artist.');
+            e.target.reset();
+        }
+
+        function openVideoLink(e, url) {
+            e.preventDefault();
+            window.open(url, '_blank');
+        }
+
+        function downloadDemo(e, filename) {
+            e.preventDefault();
+            alert(`Download would start for: ${filename}\n\nIn a live site, this would download your demo file. You can replace this with actual file URLs.`);
+            // In real implementation: window.location.href = '/path/to/demos/' + filename;
+        }
+
+        function openPage(e, pageType) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const pages = {
+                'animated-movies': {
+                    title: '🎬 Animated Movies Voiceover',
+                    content: `
+                        <h3>Professional Voice Acting for Feature Animation</h3>
+                        <p>Bring your animated characters to life with professional voice acting that captivates audiences and creates memorable performances. With years of experience in feature animation, I specialize in creating distinctive character voices that resonate with viewers of all ages.</p>
+                        
+                        <h3>What's Included:</h3>
+                        <ul>
+                            <li>Character voice development and consultation</li>
+                            <li>Multiple recording sessions with direction</li>
+                            <li>Emotional range and character depth</li>
+                            <li>Script analysis and character breakdown</li>
+                            <li>Revisions and pickups as needed</li>
+                            <li>Professional studio recording quality</li>
+                        </ul>
+
+                        <div class="price-box">
+                            <h4>💰 Pricing</h4>
+                            <p><strong>Lead Character Role:</strong> Starting at $2,500 per project</p>
+                            <p><strong>Supporting Character:</strong> Starting at $1,200 per project</p>
+                            <p><strong>Additional Characters:</strong> Negotiable based on scope</p>
+                        </div>
+
+                        <h3>Process:</h3>
+                        <p>1. <strong>Consultation:</strong> We discuss your character, story, and vision<br>
+                        2. <strong>Voice Samples:</strong> I provide character voice options for approval<br>
+                        3. <strong>Recording:</strong> Professional studio sessions with your direction<br>
+                        4. <strong>Review & Revisions:</strong> Refinements to perfect the performance<br>
+                        5. <strong>Final Delivery:</strong> Broadcast-quality audio files</p>
+
+                        <p style="margin-top: 30px;"><a href="#contact" class="cta-button" onclick="closeModal(); document.querySelector('#contact').scrollIntoView({behavior: 'smooth'});">Request a Quote</a></p>
+                    `
+                },
+                'tv-series': {
+                    title: '📺 TV Series Voiceover',
+                    content: `
+                        <h3>Consistent Character Voices Across Episodes</h3>
+                        <p>Television animation requires consistency, reliability, and the ability to maintain character authenticity over multiple episodes and seasons. I provide professional voice acting that keeps your characters true to their personality throughout your series.</p>
+                        
+                        <h3>Services Include:</h3>
+                        <ul>
+                            <li>Character voice consistency across episodes</li>
+                            <li>Flexible recording schedules</li>
+                            <li>Quick turnaround for episodic content</li>
+                            <li>Multiple character voices available</li>
+                            <li>Long-term project collaboration</li>
+                            <li>Character evolution and growth support</li>
+                        </ul>
+
+                        <div class="price-box">
+                            <h4>💰 Pricing</h4>
+                            <p><strong>Per Episode (Lead):</strong> $800 - $1,500</p>
+                            <p><strong>Per Episode (Supporting):</strong> $400 - $800</p>
+                            <p><strong>Season Package:</strong> Discounted rates available</p>
+                        </div>
+
+                        <h3>Perfect For:</h3>
+                        <ul>
+                            <li>Animated TV series on streaming platforms</li>
+                            <li>Web series and YouTube animations</li>
+                            <li>Children's educational programs</li>
+                            <li>Adult animation comedy series</li>
+                        </ul>
+
+                        <p style="margin-top: 30px;"><a href="#contact" class="cta-button" onclick="closeModal(); document.querySelector('#contact').scrollIntoView({behavior: 'smooth'});">Discuss Your Series</a></p>
+                    `
+                },
+                'video-games': {
+                    title: '🎮 Video Game Character Voices',
+                    content: `
+                        <h3>Dynamic Voiceover for Interactive Gaming</h3>
+                        <p>Video games require versatile voice acting with multiple takes, emotional variations, and the ability to adapt to interactive gameplay. I bring characters to life with engaging performances that enhance the gaming experience.</p>
+                        
+                        <h3>Specializations:</h3>
+                        <ul>
+                            <li>Player character and NPC voices</li>
+                            <li>Combat vocalizations and effort sounds</li>
+                            <li>Dialogue trees and branching conversations</li>
+                            <li>Emotional range for various scenarios</li>
+                            <li>Multiple character types and accents</li>
+                            <li>Motion capture session availability</li>
+                        </ul>
+
+                        <div class="price-box">
+                            <h4>💰 Pricing</h4>
+                            <p><strong>Indie Game Character:</strong> Starting at $500</p>
+                            <p><strong>AAA Game Character:</strong> Starting at $2,000</p>
+                            <p><strong>Hourly Rate:</strong> $250/hour (4-hour minimum)</p>
+                        </div>
+
+                        <h3>Game Genres:</h3>
+                        <ul>
+                            <li>RPGs and adventure games</li>
+                            <li>Action and shooter games</li>
+                            <li>Strategy and simulation games</li>
+                            <li>Mobile and casual games</li>
+                        </ul>
+
+                        <p style="margin-top: 30px;"><a href="#contact" class="cta-button" onclick="closeModal(); document.querySelector('#contact').scrollIntoView({behavior: 'smooth'});">Start Your Game Project</a></p>
+                    `
+                },
+                'short-clips': {
+                    title: '🎨 Short Clips & Web Animation',
+                    content: `
+                        <h3>Punchy Voices for Short-Form Content</h3>
+                        <p>Short animations require impactful, memorable voicework that grabs attention quickly. Perfect for social media content, commercials, explainer videos, and web animations that need to make an impression fast.</p>
+                        
+                        <h3>Ideal For:</h3>
+                        <ul>
+                            <li>Social media animations (Instagram, TikTok, YouTube)</li>
+                            <li>Animated commercials and ads</li>
+                            <li>Explainer videos and tutorials</li>
+                            <li>Brand mascot voices</li>
+                            <li>Animated memes and viral content</li>
+                            <li>Short film festivals</li>
+                        </ul>
+
+                        <div class="price-box">
+                            <h4>💰 Pricing</h4>
+                            <p><strong>15-30 seconds:</strong> $150 - $300</p>
+                            <p><strong>30-60 seconds:</strong> $250 - $500</p>
+                            <p><strong>1-3 minutes:</strong> $400 - $800</p>
+                            <p><strong>Bulk Package:</strong> 5+ clips at discounted rate</p>
+                        </div>
+
+                        <h3>Fast Turnaround:</h3>
+                        <p>Standard delivery: 48-72 hours | Rush delivery available for additional fee</p>
+
+                        <p style="margin-top: 30px;"><a href="#contact" class="cta-button" onclick="closeModal(); document.querySelector('#contact').scrollIntoView({behavior: 'smooth'});">Order Your Clip</a></p>
+                    `
+                },
+                'character-dev': {
+                    title: '🎭 Character Development Services',
+                    content: `
+                        <h3>Collaborative Character Voice Creation</h3>
+                        <p>Work closely with me to develop unique, distinctive character voices from the ground up. This collaborative process ensures your characters have authentic, memorable voices that perfectly match your creative vision.</p>
+                        
+                        <h3>Development Process:</h3>
+                        <ul>
+                            <li>In-depth character analysis and backstory review</li>
+                            <li>Multiple voice concept presentations</li>
+                            <li>Accent and dialect consultation</li>
+                            <li>Emotional range exploration</li>
+                            <li>Character relationship dynamics</li>
+                            <li>Voice evolution planning for character arcs</li>
+                        </ul>
+
+                        <div class="price-box">
+                            <h4>💰 Pricing</h4>
+                            <p><strong>Single Character Development:</strong> $500 - $1,000</p>
+                            <p><strong>Character Ensemble (3-5):</strong> $1,500 - $3,000</p>
+                            <p><strong>Consultation Only:</strong> $200/hour</p>
+                        </div>
+
+                        <h3>What You Get:</h3>
+                        <ul>
+                            <li>Character voice profile document</li>
+                            <li>Sample recordings of key emotional states</li>
+                            <li>Voice reference guide for future sessions</li>
+                            <li>Collaboration on character dialogue style</li>
+                        </ul>
+
+                        <p style="margin-top: 30px;"><a href="#contact" class="cta-button" onclick="closeModal(); document.querySelector('#contact').scrollIntoView({behavior: 'smooth'});">Develop Your Character</a></p>
+                    `
+                },
+                'multi-language': {
+                    title: '🌐 Multi-Language Dubbing',
+                    content: `
+                        <h3>Professional Localization Services</h3>
+                        <p>Expand your animation's reach with professional dubbing and localization services. I work with a network of talented voice artists to provide authentic voiceover in multiple languages while maintaining the emotional integrity of the original performance.</p>
+                        
+                        <h3>Languages Available:</h3>
+                        <ul>
+                            <li>Spanish (Latin American & European)</li>
+                            <li>French</li>
+                            <li>German</li>
+                            <li>Italian</li>
+                            <li>Portuguese</li>
+                            <li>Japanese (partner network)</li>
+                            <li>Mandarin Chinese (partner network)</li>
+                            <li>And more upon request</li>
+                        </ul>
+
+                        <div class="price-box">
+                            <h4>💰 Pricing</h4>
+                            <p><strong>Per Minute of Content:</strong> $50 - $150</p>
+                            <p><strong>Feature Film:</strong> Starting at $5,000</p>
+                            <p><strong>TV Episode:</strong> Starting at $1,200</p>
+                            <p>*Pricing varies by language and project scope</p>
+                        </div>
+
+                        <h3>Services Include:</h3>
+                        <ul>
+                            <li>Script translation and adaptation</li>
+                            <li>Cultural localization consultation</li>
+                            <li>Lip-sync matching</li>
+                            <li>Native speaker voice talent</li>
+                            <li>Quality assurance review</li>
+                        </ul>
+
+                        <p style="margin-top: 30px;"><a href="#contact" class="cta-button" onclick="closeModal(); document.querySelector('#contact').scrollIntoView({behavior: 'smooth'});">Go Global</a></p>
+                    `
+                },
+                'demo-info': {
+                    title: '📄 Demo Reel Information',
+                    content: `
+                        <h3>About My Demo Reels</h3>
+                        <p>My demo reels showcase a wide range of character voices, emotional performances, and animation styles. Each demo is carefully curated to demonstrate specific skills and character types.</p>
+                        
+                        <h3>Available Demo Packages:</h3>
+                        <ul>
+                            <li><strong>Heroic Characters:</strong> Action heroes, brave protagonists, and inspiring leaders</li>
+                            <li><strong>Comedic Performances:</strong> Funny sidekicks, quirky characters, and comedic timing</li>
+                            <li><strong>Dramatic Roles:</strong> Emotional depth, wise mentors, and complex characters</li>
+                            <li><strong>Youth & Children:</strong> Authentic young character voices</li>
+                            <li><strong>Villains & Antagonists:</strong> Menacing, mysterious, and memorable bad guys</li>
+                            <li><strong>Creature & Fantasy:</strong> Non-human characters, monsters, and fantasy beings</li>
+                        </ul>
+
+                        <div class="price-box">
+                            <h4>📦 Demo Package Contents</h4>
+                            <p>The complete demo reel package includes:</p>
+                            <ul style="margin-left: 20px;">
+                                <li>6 full-length demo tracks (MP3 format)</li>
+                                <li>1 comprehensive showreel (3-5 minutes)</li>
+                                <li>Character description sheet (PDF)</li>
+                                <li>Rate card and services guide</li>
+                                <li>Contact information and booking details</li>
+                            </ul>
+                        </div>
+
+                        <h3>File Formats:</h3>
+                        <p>All demos are provided in high-quality MP3 format (320kbps) for easy playback and sharing. WAV files available upon request.</p>
+
+                        <h3>Usage Rights:</h3>
+                        <p>Demo reels are provided for evaluation purposes. Please contact me for licensing if you wish to use any demo content in your productions.</p>
+
+                        <p style="margin-top: 30px;">
+                            <a href="#" class="cta-button" onclick="downloadDemo(event, 'complete-demo-reel.zip')" style="margin-right: 10px;">⬇️ Download Full Package</a>
+                            <a href="#contact" class="cta-button" onclick="closeModal(); document.querySelector('#contact').scrollIntoView({behavior: 'smooth'});">Request Custom Demo</a>
+                        </p>
+                    `
+                }
+            };
+
+            const page = pages[pageType];
+            if (page) {
+                document.getElementById('modalBody').innerHTML = `
+                    <h2>${page.title}</h2>
+                    ${page.content}
+                `;
+                document.getElementById('serviceModal').classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('serviceModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('serviceModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animation Voice Artist | Professional Voiceover Services</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            padding: 30px 0;
+            position: relative;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #fff, #f0f0f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 5px rgba(255,255,255,0.5)); }
+            to { filter: drop-shadow(0 0 20px rgba(255,255,255,0.8)); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #fff;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 0 120px;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 24px;
+            opacity: 0.9;
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease-out 0.2s backwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 18px 45px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 18px;
+            transition: all 0.3s;
+            animation: fadeInUp 1s ease-out 0.4s backwards;
+        }
+
+        .cta-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 60px 40px;
+            margin: 40px 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .section h2 {
+            font-size: 42px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 35px;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .service-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .demo-reel {
+            text-align: center;
+        }
+
+        .audio-player {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 30px;
+            border-radius: 20px;
+            margin: 20px 0;
+            transition: all 0.3s;
+        }
+
+        .audio-player:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .audio-player h4 {
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .play-button {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.3);
+            border: none;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 10px auto;
+            display: block;
+        }
+
+        .play-button:hover {
+            background: rgba(255, 255, 255, 0.5);
+            transform: scale(1.1);
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 18px;
+            background: rgba(255, 255, 255, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-button:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 60px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-decoration: none;
+            font-size: 24px;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(1.1);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            aspect-ratio: 3/2;
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover .gallery-image {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 25px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay h3 {
+            margin-bottom: 8px;
+            font-size: 22px;
+        }
+
+        .gallery-overlay p {
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .view-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            align-self: flex-start;
+        }
+
+        .view-link:hover {
+            background: rgba(255, 255, 255, 0.5);
+            transform: translateX(5px);
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+        }
+
+        .video-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .video-player {
+            width: 100%;
+            display: block;
+            background: #000;
+        }
+
+        .video-info {
+            padding: 25px;
+        }
+
+        .video-info h3 {
+            margin-bottom: 10px;
+            font-size: 22px;
+        }
+
+        .video-info p {
+            opacity: 0.9;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .external-link {
+            display: inline-block;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .external-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(5px);
+        }
+
+        .download-link {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 8px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .download-link:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .service-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            opacity: 0.9;
+            transition: all 0.3s;
+        }
+
+        .service-link:hover {
+            opacity: 1;
+            transform: translateX(5px);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            overflow-y: auto;
+            animation: fadeIn 0.3s;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 30px;
+            padding: 50px;
+            max-width: 800px;
+            width: 100%;
+            position: relative;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            animation: slideUp 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 36px;
+            color: #fff;
+            cursor: pointer;
+            background: none;
+            border: none;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+
+        .modal-content h2 {
+            margin-bottom: 25px;
+            font-size: 36px;
+        }
+
+        .modal-content h3 {
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+
+        .modal-content p {
+            line-height: 1.8;
+            margin-bottom: 15px;
+            opacity: 0.95;
+        }
+
+        .modal-content ul {
+            margin: 20px 0 20px 30px;
+            line-height: 1.8;
+        }
+
+        .modal-content ul li {
+            margin-bottom: 10px;
+            opacity: 0.95;
+        }
+
+        .price-box {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .price-box h4 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                padding: 30px 25px;
+            }
+
+            .modal-content h2 {
+                font-size: 28px;
+            }
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 50px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -37px;
+            top: 5px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #fff;
+            border: 3px solid rgba(102, 126, 234, 0.8);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+        .timeline-year {
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s;
+        }
+
+        .timeline-content:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateX(5px);
+        }
+
+        .timeline-content h4 {
+            font-size: 20px;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+
+        .timeline-content p {
+            margin-bottom: 10px;
+            line-height: 1.7;
+            opacity: 0.95;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 5px 12px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            font-size: 12px;
+            margin-right: 8px;
+            margin-top: 5px;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            #about > div:first-of-type {
+                grid-template-columns: 1fr !important;
+            }
+
+            #about > div:nth-of-type(2) {
+                grid-template-columns: 1fr !important;
+            }
+
+            .timeline {
+                padding-left: 30px;
+            }
+
+            .timeline::before {
+                left: 10px;
+            }
+
+            .timeline-item::before {
+                left: -27px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 42px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .nav-links {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .section h2 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">🎙️ VoiceArt</div>
+                <ul class="nav-links">
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#demos">Demo Reel</a></li>
+                    <li><a href="#portfolio">Gallery</a></li>
+                    <li><a href="#videos">Videos</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Bring Your Characters to Life</h1>
+            <p>Professional Voiceover for Animation, Movies & Clips</p>
+            <a href="#contact" class="cta-button">Get a Quote</a>
+        </div>
+    </section>
+
+    <div class="container">
+        <section id="services" class="section">
+            <h2>Voiceover Services</h2>
+            <div class="services-grid">
+                <div class="service-card" data-page="animated-movies">
+                    <div class="service-icon">🎬</div>
+                    <h3>Animated Movies</h3>
+                    <p>Full-length feature animation with character depth and emotional range for unforgettable performances.</p>
+                    <a href="#" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-card" data-page="tv-series">
+                    <div class="service-icon">📺</div>
+                    <h3>TV Series</h3>
+                    <p>Consistent character voices across multiple episodes, maintaining authenticity and audience connection.</p>
+                    <a href="#" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-card" data-page="video-games">
+                    <div class="service-icon">🎮</div>
+                    <h3>Video Game Characters</h3>
+                    <p>Dynamic, versatile voicework for interactive gaming experiences with multiple character types.</p>
+                    <a href="#" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-card" data-page="short-clips">
+                    <div class="service-icon">🎨</div>
+                    <h3>Short Clips</h3>
+                    <p>Punchy, memorable voices for web animations, commercials, and social media content.</p>
+                    <a href="#" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-card" data-page="character-dev">
+                    <div class="service-icon">🎭</div>
+                    <h3>Character Development</h3>
+                    <p>Collaborative process to create unique, distinctive voices that match your vision perfectly.</p>
+                    <a href="#" class="service-link">Learn More →</a>
+                </div>
+                <div class="service-card" data-page="multi-language">
+                    <div class="service-icon">🌐</div>
+                    <h3>Multi-Language</h3>
+                    <p>Professional dubbing and localization services to reach global audiences effectively.</p>
+                    <a href="#" class="service-link">Learn More →</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <h2>About Me</h2>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; margin-bottom: 50px;">
+                <div>
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=500&fit=crop" alt="Voice Artist" style="width: 100%; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
+                </div>
+                <div>
+                    <h3 style="font-size: 28px; margin-bottom: 20px;">Bringing Characters to Life Since 2010</h3>
+                    <p style="line-height: 1.8; margin-bottom: 15px; opacity: 0.95;">
+                        With over 14 years of experience in animation voiceover, I've had the privilege of bringing hundreds of characters to life across feature films, TV series, video games, and digital content. My passion for storytelling through voice drives every performance, creating authentic and memorable characters that resonate with audiences worldwide.
+                    </p>
+                    <p style="line-height: 1.8; margin-bottom: 15px; opacity: 0.95;">
+                        From heroic protagonists to quirky sidekicks, menacing villains to heartwarming family characters, I specialize in creating distinctive voices that capture the essence of each unique personality. My approach combines technical precision with emotional authenticity, ensuring every line delivers maximum impact.
+                    </p>
+                    <p style="line-height: 1.8; opacity: 0.95;">
+                        Based in a professional home studio equipped with industry-standard recording equipment, I deliver broadcast-quality audio with quick turnaround times. I'm committed to collaborative partnerships and bringing your creative vision to life.
+                    </p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin: 50px 0 40px;">
+                <h3 style="font-size: 32px; margin-bottom: 15px;">Studio Setup</h3>
+                <p style="opacity: 0.9; margin-bottom: 30px;">Professional equipment for broadcast-quality recordings</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 50px;">
+                <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=400&h=300&fit=crop" alt="Recording Studio" style="width: 100%; border-radius: 15px; height: 250px; object-fit: cover;">
+                <img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=400&h=300&fit=crop" alt="Microphone Setup" style="width: 100%; border-radius: 15px; height: 250px; object-fit: cover;">
+                <img src="https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?w=400&h=300&fit=crop" alt="Audio Equipment" style="width: 100%; border-radius: 15px; height: 250px; object-fit: cover;">
+            </div>
+
+            <div style="margin-top: 60px;">
+                <h3 style="font-size: 32px; margin-bottom: 40px; text-align: center;">Work Experience & Highlights</h3>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-year">2023 - Present</div>
+                        <div class="timeline-content">
+                            <h4>Lead Voice Actor - "Epic Quest Adventures"</h4>
+                            <p><strong>Netflix Animated Series</strong></p>
+                            <p>Main character voice for 24-episode fantasy adventure series reaching 15M+ viewers. Performed multiple character roles including the heroic protagonist and comic relief sidekick. Series renewed for Season 2.</p>
+                            <div style="margin-top: 10px;">
+                                <span class="tag">Lead Role</span>
+                                <span class="tag">Multiple Characters</span>
+                                <span class="tag">24 Episodes</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-year">2021 - 2023</div>
+                        <div class="timeline-content">
+                            <h4>Character Voice Ensemble - "Galaxy Warriors"</h4>
+                            <p><strong>Feature Animation Film - Universal Pictures</strong></p>
+                            <p>Voiced 5 distinct characters in blockbuster animated feature with $250M worldwide box office. Worked alongside A-list talent and received critical acclaim for character depth and comedic timing.</p>
+                            <div style="margin-top: 10px;">
+                                <span class="tag">Feature Film</span>
+                                <span class="tag">Box Office Hit</span>
+                                <span class="tag">Ensemble Cast</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-year">2020 - 2022</div>
+                        <div class="timeline-content">
+                            <h4>NPC & Character Voices - "Realm of Legends"</h4>
+                            <p><strong>AAA Video Game - Electronic Arts</strong></p>
+                            <p>Over 2,000 voice lines recorded for critically acclaimed RPG game. Created distinct personalities for 12 main NPCs and numerous background characters. Game won Best Audio Design award.</p>
+                            <div style="margin-top: 10px;">
+                                <span class="tag">Video Game</span>
+                                <span class="tag">2000+ Lines</span>
+                                <span class="tag">Award Winner</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-year">2018 - 2020</div>
+                        <div class="timeline-content">
+                            <h4>Regular Cast - "Tiny Town Adventures"</h4>
+                            <p><strong>Children's Animated Series - Disney Junior</strong></p>
+                            <p>Series regular voicing multiple child characters across 52 episodes. Developed voice consistency protocols that became standard for the production. Show received Parents' Choice Award.</p>
+                            <div style="margin-top: 10px;">
+                                <span class="tag">TV Series</span>
+                                <span class="tag">52 Episodes</span>
+                                <span class="tag">Children's Content</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-year">2015 - 2018</div>
+                        <div class="timeline-content">
+                            <h4>Freelance Voiceover Artist</h4>
+                            <p><strong>Various Productions</strong></p>
+                            <p>Built reputation working on 100+ independent animation projects, commercials, and web series. Developed expertise in quick character creation and efficient recording workflows. Established strong network of repeat clients.</p>
+                            <div style="margin-top: 10px;">
+                                <span class="tag">100+ Projects</span>
+                                <span class="tag">Commercials</span>
+                                <span class="tag">Web Series</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-year">2010 - 2015</div>
+                        <div class="timeline-content">
+                            <h4>Voice Acting Training & Early Career</h4>
+                            <p><strong>Professional Development</strong></p>
+                            <p>Completed intensive voice acting program at renowned performing arts academy. Studied under industry veterans and began career with radio commercials, audiobooks, and small animation roles. Built professional home studio.</p>
+                            <div style="margin-top: 10px;">
+                                <span class="tag">Training</span>
+                                <span class="tag">Studio Setup</span>
+                                <span class="tag">Foundation</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 60px; background: rgba(255, 255, 255, 0.15); padding: 40px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.3);">
+                <h3 style="font-size: 28px; margin-bottom: 30px; text-align: center;">Skills & Specializations</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px;">
+                    <div>
+                        <h4 style="font-size: 18px; margin-bottom: 12px;">🎭 Character Types</h4>
+                        <ul style="opacity: 0.95; line-height: 1.8; list-style: none; padding: 0;">
+                            <li>✓ Heroes & Protagonists</li>
+                            <li>✓ Villains & Antagonists</li>
+                            <li>✓ Comedic Characters</li>
+                            <li>✓ Children & Teens</li>
+                            <li>✓ Fantasy Creatures</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="font-size: 18px; margin-bottom: 12px;">🎤 Voice Styles</h4>
+                        <ul style="opacity: 0.95; line-height: 1.8; list-style: none; padding: 0;">
+                            <li>✓ Animation (All Ages)</li>
+                            <li>✓ Video Game Performance</li>
+                            <li>✓ Commercial & Promo</li>
+                            <li>✓ Narration</li>
+                            <li>✓ Character Improvisation</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="font-size: 18px; margin-bottom: 12px;">🛠️ Technical Skills</h4>
+                        <ul style="opacity: 0.95; line-height: 1.8; list-style: none; padding: 0;">
+                            <li>✓ Pro Tools Expert</li>
+                            <li>✓ Source-Connect</li>
+                            <li>✓ Remote Directed Sessions</li>
+                            <li>✓ Audio Editing</li>
+                            <li>✓ Fast Turnaround</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 40px; text-align: center;">
+                <a href="#contact" class="cta-button">Let's Work Together</a>
+            </div>
+        </section>
+
+        <section id="demos" class="section demo-reel">
+            <h2>Demo Reel</h2>
+            <p style="margin-bottom: 30px; opacity: 0.9;">Listen to sample character performances and download full demo reels</p>
+            
+            <div class="audio-player">
+                <h4>🦸 Heroic Character - Action Adventure</h4>
+                <button class="play-button">▶️</button>
+                <p style="opacity: 0.8; margin-top: 10px;">Powerful, inspiring voice for brave protagonists</p>
+                <a href="#" class="download-link" data-file="heroic-character-demo.mp3">⬇️ Download Demo (MP3)</a>
+            </div>
+
+            <div class="audio-player">
+                <h4>😄 Comedic Sidekick - Animation Comedy</h4>
+                <button class="play-button">▶️</button>
+                <p style="opacity: 0.8; margin-top: 10px;">Fun, energetic delivery with perfect comedic timing</p>
+                <a href="#" class="download-link" data-file="comedic-character-demo.mp3">⬇️ Download Demo (MP3)</a>
+            </div>
+
+            <div class="audio-player">
+                <h4>👑 Wise Mentor - Fantasy Epic</h4>
+                <button class="play-button">▶️</button>
+                <p style="opacity: 0.8; margin-top: 10px;">Deep, resonant voice conveying wisdom and authority</p>
+                <a href="#" class="download-link" data-file="mentor-character-demo.mp3">⬇️ Download Demo (MP3)</a>
+            </div>
+
+            <div class="audio-player">
+                <h4>👶 Child Character - Family Animation</h4>
+                <button class="play-button">▶️</button>
+                <p style="opacity: 0.8; margin-top: 10px;">Authentic, playful voice perfect for young characters</p>
+                <a href="#" class="download-link" data-file="child-character-demo.mp3">⬇️ Download Demo (MP3)</a>
+            </div>
+
+            <div style="margin-top: 40px; text-align: center;">
+                <a href="#" class="cta-button" data-file="complete-demo-reel.zip" style="margin-right: 15px;">⬇️ Download Complete Demo Reel Package</a>
+                <a href="#" class="cta-button" data-page="demo-info">📄 View Demo Reel Info Sheet</a>
+            </div>
+        </section>
+
+        <section id="portfolio" class="section">
+            <h2>Portfolio Gallery</h2>
+            <p style="text-align: center; margin-bottom: 40px; opacity: 0.9;">Featured animation projects</p>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1578632767115-351597cf2477?w=600&h=400&fit=crop" alt="Animation Project 1" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3>Fantasy Adventure</h3>
+                        <p>Hero character voiceover</p>
+                        <a href="https://images.unsplash.com/photo-1578632767115-351597cf2477" target="_blank" class="view-link">View Full Image</a>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?w=600&h=400&fit=crop" alt="Animation Project 2" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3>Sci-Fi Series</h3>
+                        <p>Multiple character roles</p>
+                        <a href="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e" target="_blank" class="view-link">View Full Image</a>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1616530940355-351fabd9524b?w=600&h=400&fit=crop" alt="Animation Project 3" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3>Comedy Short</h3>
+                        <p>Comedic character work</p>
+                        <a href="https://images.unsplash.com/photo-1616530940355-351fabd9524b" target="_blank" class="view-link">View Full Image</a>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?w=600&h=400&fit=crop" alt="Animation Project 4" class="gallery-image">
+                    <div class="gallery-overlay">
+                        <h3>Kids Animation</h3>
+                        <p>Family-friendly characters</p>
+                        <a href="https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4" target="_blank" class="view-link">View Full Image</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="videos" class="section">
+            <h2>Video Showreel</h2>
+            <p style="text-align: center; margin-bottom: 40px; opacity: 0.9;">Watch my voiceover work in action</p>
+            
+            <div class="video-grid">
+                <div class="video-container">
+                    <video controls class="video-player" poster="https://images.unsplash.com/photo-1574267432644-f74cd9e3709a?w=600&h=400&fit=crop">
+                        <source src="your-video-file.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="video-info">
+                        <h3>Feature Animation Reel</h3>
+                        <p>Collection of character work from various projects</p>
+                        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="external-link">🔗 Watch on YouTube</a>
+                    </div>
+                </div>
+
+                <div class="video-container">
+                    <video controls class="video-player" poster="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?w=600&h=400&fit=crop">
+                        <source src="your-video-file-2.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="video-info">
+                        <h3>Behind the Scenes</h3>
+                        <p>Studio recording process and character development</p>
+                        <a href="https://vimeo.com/" target="_blank" class="external-link">🔗 Watch on Vimeo</a>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 40px; text-align: center;">
+                <a href="https://www.youtube.com/@yourchannel" target="_blank" class="cta-button">Visit My YouTube Channel</a>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <h2>Let's Work Together</h2>
+            <form class="contact-form" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" placeholder="Your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="your.email@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="project">Project Type</label>
+                    <input type="text" id="project" placeholder="e.g., Animated short film" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Project Details</label>
+                    <textarea id="message" placeholder="Tell me about your project..." required></textarea>
+                </div>
+                <button type="submit" class="submit-button">Send Message</button>
+            </form>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#" title="Twitter">🐦</a>
+                <a href="#" title="Instagram">📷</a>
+                <a href="#" title="LinkedIn">💼</a>
+                <a href="#" title="YouTube">📺</a>
+            </div>
+            <p>&copy; 2025 VoiceArt Animation Studio. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Modal for Service Pages -->
+    <div id="serviceModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script>
+        function handleSubmit(e) {
+            e.preventDefault();
+            alert('Thank you for your interest! This is a demo form. In a live site, your message would be sent to the voiceover artist.');
+            e.target.reset();
+        }
+
+        function openVideoLink(e, url) {
+            e.preventDefault();
+            window.open(url, '_blank');
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        const cards = document.querySelectorAll('.service-card');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.animation = `fadeInUp 0.6s ease-out forwards`;
+                    }, index * 100);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        cards.forEach(card => observer.observe(card));
+
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const link = this.querySelector('.view-link');
+                if (link) {
+                    window.open(link.href, '_blank');
+                }
+            });
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            const modal = document.getElementById('serviceModal');
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
