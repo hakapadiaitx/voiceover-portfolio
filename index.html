@@ -12,9 +12,9 @@
         }
 
         body {
-            font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial Rounded MT Bold', sans-serif;
-            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 50%, #fab1a0 100%);
-            color: #2d3436;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
             overflow-x: hidden;
         }
 
@@ -22,10 +22,10 @@
             position: fixed;
             width: 100%;
             padding: 1.5rem 5%;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(26, 26, 46, 0.95);
             backdrop-filter: blur(10px);
             z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         nav {
@@ -37,15 +37,12 @@
         }
 
         .logo {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #a29bfe 0%, #fd79a8 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
         }
 
         .nav-links {
@@ -55,167 +52,162 @@
         }
 
         .nav-links a {
-            color: #2d3436;
+            color: #fff;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
+            font-weight: 500;
             transition: all 0.3s ease;
             position: relative;
         }
 
         .nav-links a:hover {
-            color: #a29bfe;
-            transform: translateY(-2px);
+            color: #667eea;
         }
 
-        section {
-            min-height: 100vh;
-            padding: 8rem 5% 4rem;
-            max-width: 1400px;
-            margin: 0 auto;
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         .hero {
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 8rem 5% 4rem;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.15) 0%, transparent 70%);
+            top: 20%;
+            right: 10%;
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.3; }
         }
 
         .hero-content {
+            max-width: 1400px;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
             align-items: center;
+            position: relative;
+            z-index: 1;
         }
 
         .hero-text h1 {
             font-size: 4rem;
             margin-bottom: 1.5rem;
-            color: #6c5ce7;
-            text-shadow: 3px 3px 0px #fff;
+            line-height: 1.2;
+            background: linear-gradient(135deg, #fff 0%, #667eea 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .hero-text p {
-            font-size: 1.4rem;
-            color: #2d3436;
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.8);
             margin-bottom: 2rem;
-            line-height: 1.8;
+            line-height: 1.6;
         }
 
         .cta-button {
             display: inline-block;
-            padding: 1.2rem 3rem;
-            background: linear-gradient(135deg, #a29bfe 0%, #fd79a8 100%);
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: #fff;
             text-decoration: none;
             border-radius: 50px;
-            font-weight: 700;
-            font-size: 1.2rem;
+            font-weight: 600;
             transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(162, 155, 254, 0.4);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
         }
 
         .cta-button:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 40px rgba(162, 155, 254, 0.6);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
         }
 
-        .floating-shapes {
+        .hero-visual {
             position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .waveform {
             width: 100%;
-            height: 400px;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
-        .shape {
-            position: absolute;
-            border-radius: 50%;
-            animation: float 6s ease-in-out infinite;
+        .bar {
+            width: 8px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            animation: wave 1.5s ease-in-out infinite;
         }
 
-        .shape1 {
-            width: 120px;
-            height: 120px;
-            background: linear-gradient(135deg, #74b9ff 0%, #a29bfe 100%);
-            top: 50px;
-            left: 50px;
-            animation-delay: 0s;
+        .bar:nth-child(1) { height: 40px; animation-delay: 0s; }
+        .bar:nth-child(2) { height: 80px; animation-delay: 0.1s; }
+        .bar:nth-child(3) { height: 120px; animation-delay: 0.2s; }
+        .bar:nth-child(4) { height: 90px; animation-delay: 0.3s; }
+        .bar:nth-child(5) { height: 150px; animation-delay: 0.4s; }
+        .bar:nth-child(6) { height: 110px; animation-delay: 0.5s; }
+        .bar:nth-child(7) { height: 70px; animation-delay: 0.6s; }
+        .bar:nth-child(8) { height: 130px; animation-delay: 0.7s; }
+        .bar:nth-child(9) { height: 100px; animation-delay: 0.8s; }
+        .bar:nth-child(10) { height: 60px; animation-delay: 0.9s; }
+
+        @keyframes wave {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(1.5); }
         }
 
-        .shape2 {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%);
-            top: 200px;
-            right: 100px;
-            animation-delay: 1s;
-        }
-
-        .shape3 {
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(135deg, #55efc4 0%, #81ecec 100%);
-            bottom: 50px;
-            left: 200px;
-            animation-delay: 2s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-30px) rotate(180deg); }
+        section {
+            padding: 5rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
         h2 {
-            font-size: 3rem;
+            font-size: 2.8rem;
             text-align: center;
             margin-bottom: 3rem;
-            color: #6c5ce7;
-            text-shadow: 2px 2px 0px #fff;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .service-card {
-            background: #fff;
-            padding: 2.5rem;
-            border-radius: 30px;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            border: 4px solid transparent;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px) rotate(2deg);
-            border-color: #a29bfe;
-            box-shadow: 0 20px 40px rgba(162, 155, 254, 0.3);
-        }
-
-        .service-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-        }
-
-        .service-card h3 {
-            font-size: 1.6rem;
-            margin-bottom: 1rem;
-            color: #6c5ce7;
-        }
-
-        .service-card p {
-            color: #636e72;
-            line-height: 1.8;
-            font-size: 1.1rem;
+            background: linear-gradient(135deg, #fff 0%, #667eea 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .about-content {
-            background: #fff;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             padding: 4rem;
-            border-radius: 40px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
         }
 
         .about-grid {
@@ -229,20 +221,20 @@
         .about-image {
             width: 100%;
             aspect-ratio: 1;
-            background: linear-gradient(135deg, #a29bfe 0%, #fd79a8 100%);
-            border-radius: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 8rem;
-            box-shadow: 0 10px 30px rgba(162, 155, 254, 0.3);
+            font-size: 6rem;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
             overflow: hidden;
             position: relative;
         }
 
         .about-image img {
-            width: 100%;
-            height: 100%;
+            width: 25%;
+            height: 25%;
             object-fit: cover;
         }
 
@@ -263,25 +255,27 @@
 
         .image-placeholder p {
             color: #fff;
-            font-size: 1rem;
+            font-size: 0.9rem;
             margin-top: 1rem;
         }
 
         .about-text h3 {
             font-size: 2rem;
-            color: #6c5ce7;
+            color: #667eea;
             margin-bottom: 1.5rem;
         }
 
         .about-text p {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             line-height: 1.8;
-            color: #2d3436;
+            color: rgba(255, 255, 255, 0.8);
             margin-bottom: 1.5rem;
         }
 
         .team-section {
             margin-top: 3rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .team-grid {
@@ -292,58 +286,140 @@
         }
 
         .team-card {
-            background: linear-gradient(135deg, #a29bfe 0%, #fd79a8 100%);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             padding: 2rem;
-            border-radius: 25px;
+            border-radius: 20px;
             text-align: center;
-            color: #fff;
-            box-shadow: 0 10px 30px rgba(162, 155, 254, 0.3);
             transition: all 0.3s ease;
         }
 
         .team-card:hover {
             transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
         }
 
         .team-icon {
-            font-size: 4rem;
+            font-size: 3rem;
             margin-bottom: 1rem;
         }
 
         .team-card h4 {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             margin-bottom: 0.5rem;
+            color: #667eea;
         }
 
         .team-card p {
-            font-size: 1.1rem;
-            opacity: 0.9;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2.5rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .service-card p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+
+        .demo-reel {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 4rem;
+            border-radius: 30px;
+            margin-top: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .audio-player {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .audio-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .play-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: fit-content;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
         }
 
         .upload-section {
-            background: #fff;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             padding: 4rem;
-            border-radius: 40px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
         }
 
         .upload-area {
-            border: 4px dashed #a29bfe;
-            border-radius: 30px;
+            border: 3px dashed rgba(102, 126, 234, 0.5);
+            border-radius: 20px;
             padding: 4rem;
             text-align: center;
-            background: linear-gradient(135deg, rgba(162, 155, 254, 0.1) 0%, rgba(253, 121, 168, 0.1) 100%);
+            background: rgba(255, 255, 255, 0.02);
             margin-bottom: 2rem;
             transition: all 0.3s ease;
         }
 
         .upload-area:hover {
-            border-color: #fd79a8;
-            background: linear-gradient(135deg, rgba(162, 155, 254, 0.2) 0%, rgba(253, 121, 168, 0.2) 100%);
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
         }
 
         .upload-icon {
-            font-size: 5rem;
+            font-size: 4rem;
             margin-bottom: 1rem;
         }
 
@@ -353,20 +429,19 @@
 
         .upload-btn {
             padding: 1rem 2.5rem;
-            background: linear-gradient(135deg, #a29bfe 0%, #fd79a8 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: #fff;
             border: none;
             border-radius: 50px;
-            font-weight: 700;
-            font-size: 1.1rem;
+            font-weight: 600;
+            font-size: 1rem;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial Rounded MT Bold', sans-serif;
         }
 
         .upload-btn:hover {
             transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(162, 155, 254, 0.4);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
         }
 
         .content-list {
@@ -375,12 +450,13 @@
         }
 
         .content-item {
-            background: linear-gradient(135deg, #dfe6e9 0%, #b2bec3 100%);
+            background: rgba(255, 255, 255, 0.05);
             padding: 1.5rem;
-            border-radius: 20px;
+            border-radius: 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .content-info {
@@ -394,7 +470,7 @@
         }
 
         .delete-btn {
-            background: #ff7675;
+            background: #ff6b6b;
             color: #fff;
             border: none;
             padding: 0.5rem 1.5rem;
@@ -405,62 +481,15 @@
         }
 
         .delete-btn:hover {
-            background: #d63031;
+            background: #ee5a52;
             transform: scale(1.05);
         }
 
-        .demo-reel {
-            display: grid;
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .audio-player {
-            background: #fff;
-            padding: 2rem;
-            border-radius: 25px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.3s ease;
-        }
-
-        .audio-player:hover {
-            transform: translateX(10px);
-            box-shadow: 0 15px 40px rgba(162, 155, 254, 0.3);
-        }
-
-        .audio-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #6c5ce7;
-        }
-
-        .play-btn {
-            background: linear-gradient(135deg, #a29bfe 0%, #fd79a8 100%);
-            color: #fff;
-            border: none;
-            padding: 1rem 2.5rem;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 700;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial Rounded MT Bold', sans-serif;
-        }
-
-        .play-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 5px 20px rgba(162, 155, 254, 0.4);
-        }
-
         .contact-section {
-            background: #fff;
-            padding: 4rem;
-            border-radius: 40px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            padding: 5rem;
+            border-radius: 30px;
             text-align: center;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
         }
 
         .contact-info {
@@ -476,50 +505,30 @@
             flex-direction: column;
             align-items: center;
             gap: 0.5rem;
-            padding: 2rem;
-            background: linear-gradient(135deg, #a29bfe 0%, #fd79a8 100%);
-            border-radius: 25px;
-            color: #fff;
-            min-width: 200px;
-            transition: all 0.3s ease;
-        }
-
-        .contact-item:hover {
-            transform: translateY(-10px) rotate(3deg);
         }
 
         .contact-item span:first-child {
-            font-size: 3rem;
-        }
-
-        .contact-item span:last-child {
-            font-size: 1.1rem;
-            font-weight: 600;
+            font-size: 2rem;
         }
 
         footer {
             text-align: center;
             padding: 2rem;
-            color: #2d3436;
-            background: rgba(255, 255, 255, 0.5);
+            color: rgba(255, 255, 255, 0.5);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         @media (max-width: 768px) {
             .hero-content, .about-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .hero-text h1 {
                 font-size: 2.5rem;
             }
-            
+
             .nav-links {
                 gap: 1rem;
-                font-size: 0.9rem;
-            }
-
-            .logo {
-                font-size: 1.5rem;
             }
         }
     </style>
@@ -527,7 +536,7 @@
 <body>
     <header>
         <nav>
-            <div class="logo">🎤 Kate Reed</div>
+            <div class="logo">Kate Reed</div>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
@@ -542,14 +551,23 @@
     <section id="home" class="hero">
         <div class="hero-content">
             <div class="hero-text">
-                <h1>Hi! I'm Kate Reed! 🌟</h1>
-                <p>I bring animated characters to life with fun, colorful voices! From silly cartoons to exciting adventures, I make stories magical for kids everywhere!</p>
-                <a href="#contact" class="cta-button">Let's Create Magic Together!</a>
+                <h1>Bringing Characters to Life</h1>
+                <p>Professional voice over artist specializing in animation, children's entertainment, and advertising. I create vibrant, engaging voices that captivate young audiences and bring animated worlds to life.</p>
+                <a href="#contact" class="cta-button">Let's Work Together</a>
             </div>
-            <div class="floating-shapes">
-                <div class="shape shape1"></div>
-                <div class="shape shape2"></div>
-                <div class="shape shape3"></div>
+            <div class="hero-visual">
+                <div class="waveform">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
             </div>
         </div>
     </section>
@@ -558,43 +576,45 @@
         <h2>About Me & My Team</h2>
         <div class="about-content">
             <div class="about-grid">
-                <div class="about-image" id="kateImage">
-                    <div class="image-placeholder" onclick="document.getElementById('kateImageInput').click()">
-                        <span style="font-size: 8rem;">🎭</span>
-                        <p>Click to upload Kate's photo</p>
-                    </div>
-                    <input type="file" id="kateImageInput" style="display: none;" accept="image/*" onchange="uploadKateImage(event)">
+              <!--  <div class="about-image" id="kateImage">
+                   <div class="image-placeholder" onclick="document.getElementById('kateImageInput').click()">
+                        <span style="font-size: 6rem;">🎭</span>
+                        <p>Click to upload photo</p>
+                      </div>
+                      <input type="file" id="kateImageInput" style="display: none;" accept="image/*" onchange="uploadKateImage(event)">
+                  </div>
+-->
+                  <img src="kate.jpg" width="950" height="1200" alt="Kate Reed">
+
                 </div>
-                <div class="about-text">
-                    <h3>Meet Kate!</h3>
-                    <p>Hello! I'm Kate Reed, and I absolutely love bringing animated characters to life! For over 10 years, I've been the voice behind your favorite cartoon friends, from brave heroes to silly sidekicks.</p>
-                    <p>Whether it's a bubbly princess, a mischievous monster, or a wise old wizard, I create unique voices that help tell amazing stories. I work with talented animators and directors to make sure every character feels real and special.</p>
-                    <p>When I'm not in the recording booth, I love spending time with my own kids, reading stories, and finding inspiration for new character voices everywhere I go!</p>
+                                <div class="about-text">
+                    <h3>Meet Kate</h3>
+                    <p>Hello! I'm Kate Reed, and I absolutely love bringing animated characters to life. I'm looking to show my skills as a voice over artist. I do my best to adapt to most requests that are within my vocal range, so let's get acquainted! I'm trying to make voice over my life-long career, putting my best foot forward when it comes to work is a top priority for me, and I do my best to match what is requested of me!</p>
                 </div>
             </div>
 
             <div class="team-section">
-                <h3 style="font-size: 2rem; color: #6c5ce7; margin-bottom: 2rem; text-align: center;">My Amazing Team</h3>
+                <h3 style="font-size: 2rem; color: #667eea; margin-bottom: 2rem; text-align: center;">My Team</h3>
                 <div class="team-grid">
                     <div class="team-card">
                         <div class="team-icon">🎙️</div>
                         <h4>Sound Engineer</h4>
-                        <p>Makes every recording crystal clear and perfect!</p>
+                        <p>Makes every recording crystal clear and perfect</p>
                     </div>
                     <div class="team-card">
                         <div class="team-icon">🎬</div>
                         <h4>Director</h4>
-                        <p>Guides us to create the best character performances!</p>
+                        <p>Guides us to create the best character performances</p>
                     </div>
                     <div class="team-card">
                         <div class="team-icon">✨</div>
                         <h4>Voice Coach</h4>
-                        <p>Helps me stay in top vocal shape!</p>
+                        <p>Helps me stay in top vocal shape</p>
                     </div>
                     <div class="team-card">
                         <div class="team-icon">🎨</div>
                         <h4>Creative Team</h4>
-                        <p>Brings amazing stories and characters to life!</p>
+                        <p>Brings amazing stories and characters to life</p>
                     </div>
                 </div>
             </div>
@@ -602,55 +622,55 @@
     </section>
 
     <section id="services">
-        <h2>What I Do</h2>
+        <h2>Services</h2>
         <div class="services-grid">
             <div class="service-card">
                 <div class="service-icon">🎨</div>
                 <h3>Animation Series</h3>
-                <p>Fun character voices for your favorite TV shows! From heroes to villains, I bring them all to life!</p>
+                <p>Versatile character voices for animated TV series, from quirky sidekicks to heroic leads, with energy and personality.</p>
             </div>
             <div class="service-card">
                 <div class="service-icon">🎬</div>
-                <h3>Commercials</h3>
-                <p>Friendly, exciting voices that make products and brands come alive for kids and families!</p>
+                <h3>Commercials & Ads</h3>
+                <p>Engaging, persuasive voice work that captures attention and connects with audiences across all platforms.</p>
             </div>
             <div class="service-card">
                 <div class="service-icon">🎭</div>
                 <h3>Kids Movies</h3>
-                <p>Magical character performances for animated films that kids watch again and again!</p>
+                <p>Warm, expressive character performances that bring animated films to life and resonate with young viewers.</p>
             </div>
             <div class="service-card">
                 <div class="service-icon">📺</div>
                 <h3>Children's Shows</h3>
-                <p>Educational and entertaining voices for preschool and kids' programming!</p>
+                <p>Fun, educational, and age-appropriate voicing for kids' programming, from preschool to tweens.</p>
             </div>
             <div class="service-card">
                 <div class="service-icon">🎮</div>
                 <h3>Video Games</h3>
-                <p>Dynamic character voices for family-friendly games and interactive fun!</p>
+                <p>Dynamic character voices for family-friendly games and interactive entertainment experiences.</p>
             </div>
             <div class="service-card">
                 <div class="service-icon">🎪</div>
-                <h3>Character Creation</h3>
-                <p>Let's work together to create the perfect unique voice for your character!</p>
+                <h3>Character Development</h3>
+                <p>Collaborative approach to creating unique, memorable character voices that perfectly fit your vision.</p>
             </div>
         </div>
     </section>
 
     <section id="demos">
-        <h2>Listen to My Work!</h2>
+        <h2>Demo Reel</h2>
         <div class="demo-reel">
             <div class="audio-player">
-                <div class="audio-title">🎨 Animation Character Voices</div>
-                <button class="play-btn">▶ Play</button>
+                <div class="audio-title">🎨 Animation Character Reel</div>
+                <button class="play-btn">▶ Play Sample</button>
             </div>
             <div class="audio-player">
                 <div class="audio-title">🎬 Commercial Demo</div>
-                <button class="play-btn">▶ Play</button>
+                <button class="play-btn">▶ Play Sample</button>
             </div>
             <div class="audio-player">
-                <div class="audio-title">🎭 Kids Movie Characters</div>
-                <button class="play-btn">▶ Play</button>
+                <div class="audio-title">🎭 Kids Entertainment</div>
+                <button class="play-btn">▶ Play Sample</button>
             </div>
         </div>
     </section>
@@ -660,8 +680,8 @@
         <div class="upload-section">
             <div class="upload-area" onclick="document.getElementById('fileInput').click()">
                 <div class="upload-icon">☁️</div>
-                <h3 style="color: #6c5ce7; margin-bottom: 1rem;">Drop your audio files here or click to browse</h3>
-                <p style="color: #636e72; margin-bottom: 2rem;">Upload your voice over samples, demos, or completed projects</p>
+                <h3 style="color: #667eea; margin-bottom: 1rem;">Drop your audio files here or click to browse</h3>
+                <p style="color: rgba(255, 255, 255, 0.7); margin-bottom: 2rem;">Upload your voice over samples, demos, or completed projects</p>
                 <input type="file" id="fileInput" class="file-input" multiple accept="audio/*,video/*" onchange="handleFileUpload(event)">
                 <button class="upload-btn">Choose Files</button>
             </div>
@@ -673,8 +693,8 @@
     </section>
 
     <section id="contact" class="contact-section">
-        <h2>Let's Work Together!</h2>
-        <p style="font-size: 1.3rem; color: #2d3436; margin-bottom: 2rem;">Ready to bring your characters to life? Get in touch!</p>
+        <h2>Let's Collaborate</h2>
+        <p style="font-size: 1.2rem; color: rgba(255, 255, 255, 0.8); margin-bottom: 2rem;">Ready to bring your project to life? Get in touch today.</p>
         <div class="contact-info">
             <div class="contact-item">
                 <span>📧</span>
@@ -692,7 +712,7 @@
     </section>
 
     <footer>
-        <p>🌈 © 2025 Kate Reed Voice Over Artist. All rights reserved. Made with love and lots of fun voices! 🎤</p>
+        <p>&copy; 2025 Kate Reed - Voice Over Artist. All rights reserved.</p>
     </footer>
 
     <script>
